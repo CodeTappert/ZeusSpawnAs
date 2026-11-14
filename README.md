@@ -1,4 +1,4 @@
-# Spawn As (Zeus)
+# Spawn As any Faction in ZEUS
 
 <img src=".github/workshop/preview.jpg" alt="Spawn As for Zeus: pick the side newly placed units join" width="360">
 

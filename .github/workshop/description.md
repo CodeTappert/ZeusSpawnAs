@@ -1,4 +1,4 @@
-# Spawn As (Zeus)
+# Spawn As any Faction in ZEUS
 
 Pick **which side newly placed Zeus units join**. Want NATO troops as the enemy? Select **OPF** and place them from the BLUFOR tree: they are OPFOR the moment they hit the ground. No spawning far away and changing sides afterwards, no friendly firefight.
 

@@ -1,6 +1,6 @@
 class CfgPatches {
     class zsa_main {
-        name = "Spawn As (Zeus)";
+        name = "Spawn As any Faction in ZEUS";
         author = "[RTLS] DerTapp";
         units[] = {};
         weapons[] = {};

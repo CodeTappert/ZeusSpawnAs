@@ -1,10 +1,10 @@
-name = "Spawn As (Zeus)";
+name = "Spawn As any Faction in ZEUS";
 author = "[RTLS] DerTapp";
 picture = "logo_ca.paa";
 logo = "logo_ca.paa";
 logoOver = "logo_ca.paa";
 logoSmall = "logo_ca.paa";
-tooltip = "Spawn As (Zeus)";
+tooltip = "Spawn As any Faction in ZEUS";
 overview = "Pick which side newly placed Zeus units join: any faction can be the enemy, right where you place it. Requires CBA.";
 action = "https://github.com/CodeTappert/ZeusSpawnAs";
 actionName = "GitHub";
