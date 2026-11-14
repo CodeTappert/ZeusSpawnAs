@@ -17,7 +17,7 @@ An Arma 3 mod that lets Zeus pick **which side newly placed units join**. Want N
 
 ## Download
 
-Get the latest build from the **[Releases page](https://github.com/CodeTappert/ZeusSpawnAs/releases)**.
+**[Subscribe on the Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3839655588)** (recommended), or get the latest build from the **[Releases page](https://github.com/CodeTappert/ZeusSpawnAs/releases)**.
 
 Unzip it; it contains the mod folder `@zsa`. In the Arma 3 Launcher, go to **Mods → ⋯ More → Add watched folder** (or **Add local mod**) and pick `@zsa`.
 
@@ -77,9 +77,9 @@ The version lives in [`.hemtt/project.toml`](.hemtt/project.toml) and is shared 
 
 1. On `develop`: bump the version in `.hemtt/project.toml` and add an entry to [`CHANGELOG.md`](CHANGELOG.md).
 2. Merge `develop` into `main` → CI publishes the GitHub release.
-3. With Steam running, on `main`: `hemtt publish`. It uploads the build, the Workshop description ([`.github/workshop/description.md`](.github/workshop/description.md)) and the changelog entry to the Workshop item in `meta.cpp`.
+3. With Steam running, on `main`: `hemtt publish`. It uploads the build, the Workshop description ([`.github/workshop/description.md`](.github/workshop/description.md)) and the changelog entry to the Workshop item in [`meta.cpp`](meta.cpp).
 
-The Workshop item itself (and its preview image) is created once with Arma 3 Publisher (Arma 3 Tools); then put its id into `meta.cpp` (`protocol = 1; publishedid = <id>;`).
+The Workshop preview image is [`.github/workshop/preview.jpg`](.github/workshop/preview.jpg); it can only be changed with Arma 3 Publisher (Arma 3 Tools).
 
 ## Contributing
 
