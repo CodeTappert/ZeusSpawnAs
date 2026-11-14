@@ -104,11 +104,15 @@ _display setVariable ["zsa_controls", [_stripFrame, _chips, _title, _titleFrame,
 [zsa_sideIndex, _display] call zsa_fnc_setSide;
 
 // Follow the vanilla interface: hidden with Backspace (vanilla fades its panels) and,
-// for the strip, when the Create panel is collapsed. Removed when the display closes.
+// for the strip, when the Create panel is collapsed (R). Removed when the display closes.
+// Only call ctrlShow on a change: hiding a control every frame makes the vanilla panel titles flicker.
 addMissionEventHandler ["EachFrame", {
     _thisArgs params ["_display", "_ctrlAdd", "_ctrlClock", "_strip", "_banner"];
     if (isNull _display) exitWith { removeMissionEventHandler ["EachFrame", _thisEventHandler] };
 
-    _strip ctrlShow (ctrlFade _ctrlAdd < 0.5);
-    _banner ctrlShow (zsa_sideIndex > 0 && {ctrlFade _ctrlClock < 0.5});
+    private _showStrip = ctrlFade _ctrlAdd < 0.5;
+    if (_showStrip != ctrlShown _strip) then { _strip ctrlShow _showStrip };
+
+    private _showBanner = zsa_sideIndex > 0 && {ctrlFade _ctrlClock < 0.5};
+    if (_showBanner != ctrlShown _banner) then { _banner ctrlShow _showBanner };
 }, [_display, _ctrlAdd, _ctrlClock, _strip, _banner]];
