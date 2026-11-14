@@ -5,13 +5,13 @@
  *
  * Arguments:
  * 0: Index into zsa_sides: 0 = DEFAULT, 1 = BLUFOR, 2 = OPFOR, 3 = INDEPENDENT, 4 = CIVILIAN <NUMBER>
+ * 1: Zeus display, needed while it is still loading (findDisplay doesn't find it yet) <DISPLAY> (default: findDisplay 312)
  */
 
-params ["_index"];
+params ["_index", ["_display", findDisplay 312]];
 
 zsa_sideIndex = _index;
 
-private _display = findDisplay 312;
 if (isNull _display) exitWith {};
 (_display getVariable ["zsa_controls", []]) params ["_stripFrame", "_chips", "_title", "_titleFrame", "_hint"];
 if (isNil "_chips") exitWith {};

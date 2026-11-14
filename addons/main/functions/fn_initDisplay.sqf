@@ -101,7 +101,7 @@ _hint ctrlSetTextColor [0.84, 0.84, 0.84, 1];
 _hint ctrlSetBackgroundColor [0, 0, 0, 0.55];
 
 _display setVariable ["zsa_controls", [_stripFrame, _chips, _title, _titleFrame, _hint]];
-[zsa_sideIndex] call zsa_fnc_setSide;
+[zsa_sideIndex, _display] call zsa_fnc_setSide;
 
 // Follow the vanilla interface: hidden with Backspace (vanilla fades its panels) and,
 // for the strip, when the Create panel is collapsed. Removed when the display closes.
