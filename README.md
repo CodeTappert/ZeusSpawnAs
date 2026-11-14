@@ -1,5 +1,7 @@
 # Spawn As (Zeus)
 
+<img src=".github/workshop/preview.jpg" alt="Spawn As for Zeus: pick the side newly placed units join" width="360">
+
 An Arma 3 mod that lets Zeus pick **which side newly placed units join**. Want NATO troops as the enemy? Select **OPF** and place them from the BLUFOR tree: they are OPFOR the moment they hit the ground. No spawning far away and changing sides afterwards, no friendly firefight.
 
 ## Features
