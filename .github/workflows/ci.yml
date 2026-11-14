@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      # Version comes from .hemtt/project.toml (same as the Workshop upload).
+      # A GitHub release is only published if that version has no tag yet.
+      - name: Version
+        id: v
+        run: |
+          version=$(sed -nE 's/^(major|minor|patch) = ([0-9]+)/\2/p' .hemtt/project.toml | paste -sd.)
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/v${version}" >/dev/null; then
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # hemtt publish needs a changelog entry for the version, so catch a missing one here
+      - name: Check changelog
+        run: |
+          grep -qF "## [${{ steps.v.outputs.version }}]" CHANGELOG.md \
+            || { echo "::error file=CHANGELOG.md::No entry for version ${{ steps.v.outputs.version }}"; exit 1; }
+
+      # Plain download via gh (authenticated); arma-actions/hemtt hits the anonymous API rate limit
+      - name: Install HEMTT
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$HOME/bin"
+          gh release download v1.23.1 -R BrettMayson/HEMTT -p linux-x64 -O "$HOME/bin/hemtt"
+          chmod +x "$HOME/bin/hemtt"
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+
+      # Lints, builds and signs the mod; zips it as releases/zsa-<version>.zip
+      - name: Build signed release
+        run: hemtt release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zsa-${{ steps.v.outputs.version }}
+          path: .hemttout/release
+
+      - name: Publish GitHub release
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && steps.v.outputs.released != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.v.outputs.version }}
+          name: v${{ steps.v.outputs.version }}
+          files: releases/zsa-${{ steps.v.outputs.version }}.zip
+          generate_release_notes: true
